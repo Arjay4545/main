@@ -12,6 +12,7 @@
 
 /* Custom Scrollbar Styles */
 .scrollbar-thin::-webkit-scrollbar {
+    display:none;
     width: 8px;
 }
 

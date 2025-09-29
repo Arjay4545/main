@@ -35,7 +35,7 @@ const HomeSidebar = ({ onSelect }) => {
     if (!equipmentPaths.includes(path)) {
       setOpenEquipment(false);
     }
-    
+        
     // Simulate navigation (in real app, this would be handled by your router)
     if (typeof window !== "undefined") {
       setTimeout(() => {

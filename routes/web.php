@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome'); // show login first
@@ -12,9 +13,13 @@ Route::get('/dashboard', function () {
     return view('home'); // loads resources/views/home.blade.php with Dashboard component
 })->name('dashboard');
 
-Route::get('/employee', function () {
+Route::get('/employee_page', function () {
     return view('employee_page');
-})->name('employee');
+})->name('employee_page');
+
+Route::get('/employeeDashboard', function () {
+    return view('employee');
+})->name('employeeDashboard');
 
 Route::get('/viewapproved', function () {
     return view('viewapproved'); // loads resources/views/viewapproved.blade.php
@@ -46,8 +51,8 @@ Route::post('/login', function () {
         return redirect()->route('dashboard');
     }
     
-    // For all other users, redirect to dashboard by default
-    return redirect()->route('dashboard');
+    // For all other users (employees), redirect to employee dashboard
+    return redirect()->route('employeeDashboard');
 })->name('login');
 
 Route::get('/equipment', function () {
