@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { initReact } from './utils/initReact';
-import Employee from './Users/Employee.jsx';
+import EmployeeDashboard from './Users/EmployeeDashboard.jsx';
 import EmployeePage from './EmployeePage.jsx';
 import SimpleEmployee from './SimpleEmployee';
 import ViewRequest from './ViewRequest';
@@ -157,13 +157,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             };
             
-            // Render Employee component directly on employee page
+            // Render EmployeeDashboard component directly on employee page
             try {
-                console.log('Rendering Employee component on employee-root');
-                root.render(React.createElement(Employee));
-                console.log('Employee component rendered to employee-root');
+                console.log('Rendering EmployeeDashboard component on employee-root');
+                root.render(React.createElement(EmployeeDashboard));
+                console.log('EmployeeDashboard component rendered to employee-root');
             } catch (employeeError) {
-                console.error('Error rendering Employee component:', employeeError);
+                console.error('Error rendering EmployeeDashboard component:', employeeError);
                 // Try to use the inline fallback component if available
                 if (window.EmployeeFallback) {
                     console.log('Using inline EmployeeFallback component');
@@ -327,11 +327,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Try to render the main component with error handling
             try {
-                console.log('Attempting to render Employee component');
-                root.render(React.createElement(Employee));
-                console.log('Employee component rendered to root');
+                console.log('Attempting to render EmployeeDashboard component');
+                root.render(React.createElement(EmployeeDashboard));
+                console.log('EmployeeDashboard component rendered to root');
             } catch (employeeError) {
-                console.error('Error rendering Employee component:', employeeError);
+                console.error('Error rendering EmployeeDashboard component:', employeeError);
                 // Try to use the inline fallback component if available
                 if (window.EmployeeFallback) {
                     console.log('Using inline EmployeeFallback component');
