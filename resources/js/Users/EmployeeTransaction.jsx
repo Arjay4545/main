@@ -185,6 +185,42 @@ const EmployeeTransaction = () => {
     );
   }
 
+// ItemsList component moved outside EmployeeTransaction
+function ItemsList() {
+  const items = [
+    "Laptop", "Mouse", "Keyboard", "Monitor", "Printer",
+    "Desk", "Chair", "Projector", "Router", "Cable"
+  ];
+
+  const [limit, setLimit] = useState(5); // default rows
+
+  return (
+    <div className="p-4">
+      <div className="mb-3">
+        <label className="mr-2">Show:</label>
+        <select
+          value={limit}
+          onChange={(e) => setLimit(Number(e.target.value))}
+          className="border rounded px-2 py-1"
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+        </select>
+        <span className="ml-2">entries</span>
+      </div>
+
+      <ul className="border rounded p-2">
+        {items.slice(0, limit).map((item, i) => (
+          <li key={i} className="py-1 border-b last:border-0">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
   // Show History page if showHistory is true
   if (showHistory) {
     return (
@@ -286,7 +322,7 @@ const EmployeeTransaction = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-lg shadow-gray-400/60">
               <h3 className="text-lg font-semibold text-gray-800 mb-6">Exchange</h3>
               
               <div className="space-y-4 mb-6">
@@ -314,7 +350,7 @@ const EmployeeTransaction = () => {
               </div>
             </div>
 
-            <div className="rounded-lg shadow-lg shadow-black-700/80 h-full bg-blue-600 text-white p-6">
+            <div className="rounded-xl shadow-lg border-gray-200 shadow-gray-400/60 bg-blue-600 text-white p-6">
               <div className="flex justify-between items-start mb-4">
                 <span className="text-sm font-medium">Item Currently Borrowed</span>
                 <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full"></div>
@@ -336,15 +372,14 @@ const EmployeeTransaction = () => {
             <h1 className="text-2xl font-bold text-blue-600">Pendings</h1>
             <button 
               onClick={() => setShowPendings(false)}
-              className="text-sm text-gray-600 hover:text-gray-900"
-            >
+              className="text-sm text-gray-600 hover:text-gray-900">
               ← Back to Transaction
             </button>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200">
+          <div className="rounded-xl shadow-lg shadow-gray-400/60 bg-white">
             <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-              <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700">
+              <div className="grid grid-cols-10 gap-10 text-sm font-medium text-gray-700">
                 <div className="col-span-2">Item</div>
                 <div className="col-span-2">Start Date</div>
                 <div className="col-span-2">Return Date</div>
@@ -356,7 +391,7 @@ const EmployeeTransaction = () => {
             <div className="divide-y divide-gray-100">
               {pendingTransactions.length > 0 ? pendingTransactions.map((transaction, index) => (
                 <div key={transaction.id || index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
-                  <div className="grid grid-cols-12 gap-4 items-center">
+                  <div className="grid grid-cols-10 gap-10 items-center">
                     <div className="col-span-2">
                       <span className="text-sm text-gray-900">
                         {transaction.equipment_name || transaction.item || "Laptop, Projector, etc"}
@@ -470,26 +505,29 @@ const EmployeeTransaction = () => {
         </div>
 
         <div className="col-span-4">
-          <div className="bg-blue-600 rounded-lg p-6 text-white">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium opacity-90">Denied Request</h3>
-              <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-white bg-opacity-40 rounded-full"></div>
-              </div>
-            </div>
-            <div className="text-4xl font-bold mb-4">3</div>
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="w-full text-sm text-white bg-blue-700 px-4 py-2 rounded-md hover:bg-blue-800 transition-colors"
-            >
-              View All
-            </button>
-          </div>
-          <div className="mt-4 bg-white rounded-lg border-2 border-blue-500 p-6 h-96"></div>
+          <div className="mt-4 bg-white p-6 h-88 rounded-xl shadow-lg shadow-gray-400/60 font-bold">Inspect</div>
+          <div className="rounded-xl shadow-lg shadow-gray-400/60 mt-4 bg-blue-600 p-9 text-white">
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-sm font-medium opacity-90">Denied Request</h3>
+    <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+      <div className="w-6 h-6 bg-white bg-opacity-40 rounded-full"></div>
+    </div>
+  </div>
+
+  {/* Number and Button in one flex row */}
+  <div className="flex items-center justify-between">
+    <div className="text-4xl font-bold">3</div>
+    <button
+      onClick={() => setIsModalOpen(true)}
+      className="text-sm text-white bg-blue-700 px-7 mt-7 py-2 rounded-md hover:bg-blue-800 transition-colors">
+      View All
+    </button>
+  </div>
+</div>
         </div>
 
         {isModalOpen && (
-          <div className="fixed inset-0 bg-gray-300 bg-opacity-500 flex items-center justify-center z-50 p-4">
+          <div className= "absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 p-4 ">
             <div className="shadow-lg shadow-gray-500 h-full bg-gray-100 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
               <div className="flex items-center justify-between p-6 border-b">
                 <h2 className="text-2xl font-bold text-blue-600">Denied Requests</h2>
@@ -621,7 +659,7 @@ const EmployeeTransaction = () => {
           </div>
 
           <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-            <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700">
+            <div className="grid grid-cols-10 gap-10 text-sm font-medium text-gray-700">
               <div className="col-span-2">Item</div>
               <div className="col-span-2">Start Date</div>
               <div className="col-span-2">Return Date</div>
@@ -633,7 +671,7 @@ const EmployeeTransaction = () => {
           <div className="divide-y divide-gray-100">
             {pendingTransactions.length > 0 ? pendingTransactions.slice(0, 3).map((transaction, index) => (
               <div key={transaction.id || index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
-                <div className="grid grid-cols-12 gap-4 items-center">
+                <div className="grid grid-cols-10 gap-10 items-center">
                   <div className="col-span-2">
                     <span className="text-sm text-gray-900">
                       {transaction.equipment_name || transaction.item || "Laptop, Projector, etc"}
@@ -840,7 +878,7 @@ const EmployeeTransaction = () => {
           </button>
         </div>
 
-        <div className="shadow-lg shadow-gray-400/60 p-6 h-full bg-white rounded-lg border border-gray-200">
+        <div className="shadow-lg shadow-gray-400/60 p-6 bg-white rounded-lg border border-gray-200">
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900">Recent Activities</h3>
           </div>
@@ -862,6 +900,8 @@ const EmployeeTransaction = () => {
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900">Request Laptop, Projector, etc</p>
               </div>
+
+              
             </div>
           </div>
         </div>
@@ -869,5 +909,4 @@ const EmployeeTransaction = () => {
     </div>
   );
 };
-
 export default EmployeeTransaction;

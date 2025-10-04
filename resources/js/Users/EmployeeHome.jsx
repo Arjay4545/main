@@ -107,19 +107,12 @@ const EmployeeHome = () => {
 
     const itemsSection = document.getElementById('items-section');
     if (itemsSection) {
-      itemsSection.style.border = '3px solid #3B82F6';
-      itemsSection.style.borderRadius = '8px';
       
       itemsSection.scrollIntoView({ 
         behavior: 'smooth',
         block: 'start',
         inline: 'nearest'
       });
-      
-      setTimeout(() => {
-        itemsSection.style.border = '';
-        itemsSection.style.borderRadius = '';
-      }, 2000);
     }
   };
 
@@ -200,14 +193,14 @@ const EmployeeHome = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-50">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-blue-600">Homepage</h1>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 h-full">
+      <div className="pl-5 grid grid-cols-12 gap-8 items-start bg-gray-50">
         <div className="col-span-3">
-          <div className="rounded-lg shadow-lg shadow-gray-500/70 p-6 h-full">
+          <div className="rounded-xl bg-white shadow-lg shadow-gray-400/60 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">Item Categories</h2>
             <div className="grid grid-cols-2 gap-3">
               {categories.map((category) => (
@@ -229,8 +222,8 @@ const EmployeeHome = () => {
           </div>
         </div>
 
-        <div className="col-span-6">
-          <div className="rounded-lg shadow-lg shadow-gray-500/70 p-6 h-full">
+        <div className=" rounded-xl col-span-5 bg-white">
+          <div className="rounded-xl shadow-lg shadow-gray-400/60 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">
               {selectedCategory ? `${selectedCategory} Types` : 'Equipment Types'}
             </h2>
@@ -276,8 +269,8 @@ const EmployeeHome = () => {
           </div>
         </div>
 
-        <div id="items-section" className="col-span-3">
-          <div className="rounded-lg shadow-lg shadow-gray-400/60 p-6 h-full bg-white">
+        <div id="items-section" className="shadow-lg shadow-gray-400/60 rounded-xl w-96 min-w-[20rem] space-y-3 mb-4 overflow-y-auto max-h-125 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="rounded-xl shadow-lg shadow-gray-400/60 p-6 h-full bg-white w-full max-w-full">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Items</h2>
             <div className="space-y-3 mb-4">
               {cartItems.map((item) => (
